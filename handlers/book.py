@@ -202,7 +202,7 @@ async def _show_class_weapons(query, cls: str):
     for wid, w in sorted_weapons:
         stars  = RARITY_STARS.get(w.get("rarity","common"),"⭐")
         stats  = w.get("stats",{})
-        s_str  = " | ".join(f"+{v} {k.upper()}" for k, v in list(stats.items())[:3])
+        s_str  = " | ".join(f"+{v} {k.upper().replace('_', ' ')}" for k, v in list(stats.items())[:3])
         price_str = ""
         if w.get("diamond_price"):
             price_str = f"💎 {w['diamond_price']}"
@@ -243,7 +243,7 @@ async def _show_class_armors(query, cls: str):
     for aid, a in sorted_armors:
         stars  = RARITY_STARS.get(a.get("rarity","common"),"⭐")
         stats  = a.get("stats",{})
-        s_str  = " | ".join(f"+{v} {k.upper()}" for k, v in list(stats.items())[:3])
+        s_str  = " | ".join(f"+{v} {k.upper().replace('_', ' ')}" for k, v in list(stats.items())[:3])
         price_str = ""
         if a.get("diamond_price"):
             price_str = f"💎 {a['diamond_price']}"
