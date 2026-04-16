@@ -237,7 +237,7 @@ async def _ask_buy_equipment(query, player: dict, item_id: str, eq_type: str):
         return
     req_level = item.get("req_level", 1)
     stars = RARITY_STARS.get(item.get("rarity", "common"), "⭐")
-    stats_txt = ", ".join(f"+{v} {k.upper()}" for k, v in item.get("stats", {}).items())
+    stats_txt = ", ".join(f"+{v} {k.upper().replace('_', ' ')}" for k, v in item.get("stats", {}).items())
     level_warn = ""
     if player.get("level", 1) < req_level and not is_admin(player.get("user_id", 0)):
         level_warn = f"\n⚠️ *Butuh Level {req_level}!* (Kamu Lv.{player.get('level',1)})"
@@ -1443,7 +1443,7 @@ async def _confirm_buy_premium(query, player: dict, item_id: str, item_type: str
 
     stats_txt = ""
     if item_type != "skill" and item.get("stats"):
-        stats_txt = "\n📊 Stats: _" + ", ".join(f"+{v} {k.upper().replace('MAX_','MAX ')}" for k, v in item["stats"].items()) + "_"
+        stats_txt = "\n📊 Stats: _" + ", ".join(f"+{v} {k.upper().replace('_', ' ')}" for k, v in item["stats"].items()) + "_"
 
     text = (
         f"╔══════════════════════════════════╗\n"
