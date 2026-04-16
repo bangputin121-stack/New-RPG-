@@ -182,7 +182,7 @@ async def _show_equipment_detail(query, player: dict):
             item  = get_item(item_id)
             stars = RARITY_STARS.get(item.get("rarity","common"),"⭐") if item else ""
             name  = item["name"] if item else item_id
-            stats = ", ".join(f"+{v} {k.upper()}" for k,v in item.get("stats",{}).items()) if item else ""
+            stats = ", ".join(f"+{v} {k.upper().replace('_', ' ')}" for k,v in item.get("stats",{}).items()) if item else ""
             text += f"*{label}:* {name} {stars}\n_{stats}_\n\n"
             buttons.append([InlineKeyboardButton(
                 f"♻️ Lepas {label}", callback_data=f"inv_unequip_{slot}"
@@ -414,7 +414,7 @@ async def _show_choose_weapon(query, player: dict):
         seen_ids.add(item_id)
         equipped_tag = " ✅" if is_equipped else ""
         stars = RARITY_STARS.get(item.get("rarity","common"),"⭐")
-        stats = " | ".join(f"+{v} {k.upper()}" for k,v in item.get("stats",{}).items())
+        stats = " | ".join(f"+{v} {k.upper().replace('_', ' ')}" for k,v in item.get("stats",{}).items())
         label = f"🗡️ {item['name']}{equipped_tag}"
         item_list.append((item_id, item, stars, stats))
         buttons.append([InlineKeyboardButton(label, callback_data=f"inv_equip_weapon_{item_id}")])
@@ -474,7 +474,7 @@ async def _show_choose_armor(query, player: dict):
         seen_ids.add(item_id)
         equipped_tag = " ✅" if is_equipped else ""
         stars = RARITY_STARS.get(item.get("rarity","common"),"⭐")
-        stats = " | ".join(f"+{v} {k.upper()}" for k,v in item.get("stats",{}).items())
+        stats = " | ".join(f"+{v} {k.upper().replace('_', ' ')}" for k,v in item.get("stats",{}).items())
         item_list.append((item_id, item, stars, stats))
         label = f"🛡️ {item['name']}{equipped_tag}"
         buttons.append([InlineKeyboardButton(label, callback_data=f"inv_equip_armor_{item_id}")])
