@@ -81,6 +81,7 @@ async def show_welcome(update, context):
 async def gender_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
+    user   = query.from_user   # BUG FIX: variabel 'user' belum pernah di-assign
     gender = "male" if query.data == "gender_male" else "female"
     context.bot_data[f"{user.id}_pending_gender"] = gender
 
@@ -109,6 +110,7 @@ async def gender_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def class_selection_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
+    user   = query.from_user   # BUG FIX: variabel 'user' belum pernah di-assign
     char_class = query.data.replace("class_", "")
     context.bot_data[f"{user.id}_pending_class"] = char_class
 
